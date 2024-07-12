@@ -25,7 +25,7 @@ export const Pill = ({ content, rowId }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:8000/api/table/update/", {
+      const response = await fetch("https://mycontent-backend.onrender.com/api/table/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
