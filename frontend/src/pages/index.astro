@@ -45,49 +45,51 @@ const table = await getTable(results ? Number(results) : 5);
                   >All projects from MyContent team</span
                 >
               </h3>
-              <div class="relative flex flex-wrap items-center my-2 overflow-x-auto">
+              <div
+                class="relative flex flex-wrap items-center my-2 overflow-x-auto"
+              >
                 <span class="inline-block font-xl font-light pe-4"
                   >Results:</span
                 >
                 <!-- <select
                   id="rowsPerPage"
-                  class="inline-block font-xl leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
+                  class="inline-block font-xl leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-primary bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
                 >
                 </select> -->
                 <div class="flex items-center space-x-4">
                   <a
                     href="/?results=5"
-                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
+                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-primary bg-dark-light border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
                   >
                     5
                   </a>
                   <a
                     href="/?results=10"
-                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
+                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-primary bg-dark-light border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
                   >
                     10
                   </a>
                   <a
                     href="/?results=20"
-                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
+                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-primary bg-dark-light border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
                   >
                     20
                   </a>
                   <a
                     href="/?results=40"
-                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
+                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-primary bg-dark-light border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
                   >
                     40
                   </a>
                   <a
                     href="/?results=50"
-                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
+                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-primary bg-dark-light border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
                   >
                     50
                   </a>
                   <a
                     href="/?results=100"
-                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
+                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-primary bg-dark-light border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
                   >
                     100
                   </a>
@@ -106,56 +108,64 @@ const table = await getTable(results ? Number(results) : 5);
                       class="font-semibold text-[0.95rem] text-secondary-dark"
                     >
                       {
-                        table && table[0].map((th: any) => {
-                          return (
-                            <th class="pb-3 text-center min-w-[100px] uppercase">
-                              {th}
-                            </th>
-                          );
-                        })
+                        table &&
+                          table[0].map((th: any) => {
+                            return (
+                              <th class="pb-3 text-center min-w-[100px] uppercase">
+                                {th}
+                              </th>
+                            );
+                          })
                       }
                     </tr>
                   </thead>
                   <tbody>
                     {
-                      table && table.map(
-                        (row: any, rowIndex: number) =>
-                          rowIndex !== 0 && (
-                            <tr id={`${rowIndex}`}>
-                              {row.map((cell: any, cellIndex: number) => (
-                                <td class="p-3 pl-0 text-base text-center">
-                                  {/* Emails */}
-                                  {/* Social Media Accounts */}
-                                  {/* Status */}
-                                  {cellIndex == 1 ? (
-                                    <a
-                                      href={`mailto:${cell}`}
-                                      class="text-primary font-light"
-                                    >
-                                      {cell}
-                                    </a>
-                                  ) : cell.startsWith("fb") ? (
-                                    <a
-                                      target="_blank"
-                                      href={`https://facebook.com/${cell.replace("fb_", "")}`}
-                                    >
-                                      {cell}
-                                    </a>
-                                  ) : cell.startsWith("ig") ? (
-                                    <a
-                                      target="_blank"
-                                      href={`https://instagram.com/${cell.replace("ig_", "")}`}
-                                    >
-                                      {cell}
-                                    </a>
-                                  ) : cellIndex === row.length - 1 ? <Pill rowId={rowIndex} content={cell} client:only/> : (
-                                    cell
-                                  )}
-                                </td>
-                              ))}
-                            </tr>
-                          )
-                      )
+                      table &&
+                        table.map(
+                          (row: any, rowIndex: number) =>
+                            rowIndex !== 0 && (
+                              <tr id={`${rowIndex}`}>
+                                {row.map((cell: any, cellIndex: number) => (
+                                  <td class="p-3 pl-0 text-base text-center">
+                                    {/* Emails */}
+                                    {/* Social Media Accounts */}
+                                    {/* Status */}
+                                    {cellIndex == 1 ? (
+                                      <a
+                                        href={`mailto:${cell}`}
+                                        class="text-primary font-light"
+                                      >
+                                        {cell}
+                                      </a>
+                                    ) : cell.startsWith("fb") ? (
+                                      <a
+                                        target="_blank"
+                                        href={`https://facebook.com/${cell.replace("fb_", "")}`}
+                                      >
+                                        {cell}
+                                      </a>
+                                    ) : cell.startsWith("ig") ? (
+                                      <a
+                                        target="_blank"
+                                        href={`https://instagram.com/${cell.replace("ig_", "")}`}
+                                      >
+                                        {cell}
+                                      </a>
+                                    ) : cellIndex === row.length - 1 ? (
+                                      <Pill
+                                        rowId={rowIndex}
+                                        content={cell}
+                                        client:only
+                                      />
+                                    ) : (
+                                      cell
+                                    )}
+                                  </td>
+                                ))}
+                              </tr>
+                            )
+                        )
                     }
                   </tbody>
                 </table>
@@ -241,5 +251,10 @@ const table = await getTable(results ? Number(results) : 5);
     grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
     gap: 2rem;
     padding: 0;
+  }
+
+  td:last-child {
+    display: flex;
+    justify-content: stretch;
   }
 </style>

@@ -54,7 +54,7 @@ export const Pill = ({ content, rowId }) => {
   };
 
   return wasClicked ? (
-    <form className="flex justify-center items-stretch" onSubmit={handleSubmit}>
+    <form className="flex items-stretch" onSubmit={handleSubmit}>
       <select
         className={pillClass}
         name={content}
@@ -70,13 +70,13 @@ export const Pill = ({ content, rowId }) => {
       </select>
       <button
         type="submit"
-        className="ml-2 inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+        className="ml-2 inline-flex items-center px-2.5 py-1.5 border border-transparent bg-dark-light text-xs font-medium rounded shadow-sm hover:text-white bg-gray-400 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 bg-dark-light text-primary"
       >
         Update
       </button>
     </form>
   ) : (
-    <span onClick={handleClick} className={`${pillClass} cursor-pointer`}>
+    <span onClick={handleClick} className={`${pillClass} cursor-pointer justify-center flex w-full`}>
       {content}
     </span>
   );
