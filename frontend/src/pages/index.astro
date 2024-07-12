@@ -106,7 +106,7 @@ const table = await getTable(results ? Number(results) : 5);
                       class="font-semibold text-[0.95rem] text-secondary-dark"
                     >
                       {
-                        table[0].map((th: any) => {
+                        table && table[0].map((th: any) => {
                           return (
                             <th class="pb-3 text-center min-w-[100px] uppercase">
                               {th}
@@ -118,7 +118,7 @@ const table = await getTable(results ? Number(results) : 5);
                   </thead>
                   <tbody>
                     {
-                      table.map(
+                      table && table.map(
                         (row: any, rowIndex: number) =>
                           rowIndex !== 0 && (
                             <tr id={`${rowIndex}`}>
