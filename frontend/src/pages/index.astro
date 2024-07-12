@@ -1,0 +1,245 @@
+---
+import { Pill } from "../components/Pill";
+import Layout from "../layouts/Layout.astro";
+
+const results = Astro.url.searchParams.get("results") || "";
+export const prerender = false;
+
+const getTable = async (results: number = 4) => {
+  const res = await fetch(
+    `http://localhost:8000/api/table/?results=${results + 1}`
+  );
+  const data = await res.json();
+  return data;
+};
+const table = await getTable(results ? Number(results) : 5);
+---
+
+<Layout title="MyContent Agency - Dashboard">
+  <main>
+    <h1>MyContent Agency</h1>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/riva-dashboard-tailwind/riva-dashboard.css"
+    />
+    <div class="flex flex-wrap -mx-3 mb-5">
+      <div class="w-full max-w-full px-3 mb-6 mx-auto">
+        <div
+          class="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5"
+        >
+          <div
+            class="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30"
+          >
+            <!-- card header -->
+            <div
+              class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent"
+            >
+              <h3
+                class="flex flex-col items-start justify-center m-2 ml-0 font-medium text-xl/tight text-dark"
+              >
+                <span class="mr-3 font-semibold text-dark"
+                  >Projects Deliveries</span
+                >
+                <span
+                  class="mt-1 font-medium text-secondary-dark text-lg/normal"
+                  >All projects from MyContent team</span
+                >
+              </h3>
+              <div class="relative flex flex-wrap items-center my-2 overflow-x-auto">
+                <span class="inline-block font-xl font-light pe-4"
+                  >Results:</span
+                >
+                <!-- <select
+                  id="rowsPerPage"
+                  class="inline-block font-xl leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
+                >
+                </select> -->
+                <div class="flex items-center space-x-4">
+                  <a
+                    href="/?results=5"
+                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
+                  >
+                    5
+                  </a>
+                  <a
+                    href="/?results=10"
+                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
+                  >
+                    10
+                  </a>
+                  <a
+                    href="/?results=20"
+                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
+                  >
+                    20
+                  </a>
+                  <a
+                    href="/?results=40"
+                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
+                  >
+                    40
+                  </a>
+                  <a
+                    href="/?results=50"
+                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
+                  >
+                    50
+                  </a>
+                  <a
+                    href="/?results=100"
+                    class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"
+                  >
+                    100
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- end card header -->
+            <!-- card body  -->
+            <div class="flex-auto block py-8 pt-6 px-9">
+              <div class="overflow-x-auto">
+                <table
+                  class="w-full my-0 align-middle text-dark border-neutral-200"
+                >
+                  <thead class="align-bottom">
+                    <tr
+                      class="font-semibold text-[0.95rem] text-secondary-dark"
+                    >
+                      {
+                        table[0].map((th: any) => {
+                          return (
+                            <th class="pb-3 text-center min-w-[100px] uppercase">
+                              {th}
+                            </th>
+                          );
+                        })
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      table.map(
+                        (row: any, rowIndex: number) =>
+                          rowIndex !== 0 && (
+                            <tr id={`${rowIndex}`}>
+                              {row.map((cell: any, cellIndex: number) => (
+                                <td class="p-3 pl-0 text-base text-center">
+                                  {/* Emails */}
+                                  {/* Social Media Accounts */}
+                                  {/* Status */}
+                                  {cellIndex == 1 ? (
+                                    <a
+                                      href={`mailto:${cell}`}
+                                      class="text-primary font-light"
+                                    >
+                                      {cell}
+                                    </a>
+                                  ) : cell.startsWith("fb") ? (
+                                    <a
+                                      target="_blank"
+                                      href={`https://facebook.com/${cell.replace("fb_", "")}`}
+                                    >
+                                      {cell}
+                                    </a>
+                                  ) : cell.startsWith("ig") ? (
+                                    <a
+                                      target="_blank"
+                                      href={`https://instagram.com/${cell.replace("ig_", "")}`}
+                                    >
+                                      {cell}
+                                    </a>
+                                  ) : cellIndex === row.length - 1 ? <Pill rowId={rowIndex} content={cell} client:only/> : (
+                                    cell
+                                  )}
+                                </td>
+                              ))}
+                            </tr>
+                          )
+                      )
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap -mx-3 mb-5">
+      <div class="w-full max-w-full sm:w-3/4 mx-auto text-center">
+        <p class="text-sm text-slate-500 py-1">
+          Simple Spreadsheet Dashboard for <a
+            href="https://growth.mycontent.agency/lp/"
+            class="text-slate-700 hover:text-slate-900"
+            target="_blank">MyContent Academy</a
+          > by <a
+            href="https://www.linkedin.com/in/esteban-hirzfeld/"
+            class="text-slate-700 hover:text-slate-900"
+            target="_blank">Esteban Hirzfeld</a
+          >.
+        </p>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    max-width: calc(100% - 2rem);
+    color: white;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+  .astro-a {
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translatex(-50%);
+    width: 220px;
+    height: auto;
+    z-index: -1;
+  }
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  .instructions {
+    margin-bottom: 2rem;
+    border: 1px solid rgba(var(--accent-light), 25%);
+    background: linear-gradient(
+      rgba(var(--accent-dark), 66%),
+      rgba(var(--accent-dark), 33%)
+    );
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  .instructions code {
+    font-size: 0.8em;
+    font-weight: bold;
+    background: rgba(var(--accent-light), 12%);
+    color: rgb(var(--accent-light));
+    border-radius: 4px;
+    padding: 0.3em 0.4em;
+  }
+  .instructions strong {
+    color: rgb(var(--accent-light));
+  }
+  .link-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+    gap: 2rem;
+    padding: 0;
+  }
+</style>
